@@ -8,6 +8,7 @@ class ExpressServer {
     this.app = express();
     this.port = config.port;
     this.basePath = `${config.api.prefix}/test`;
+    this.basePathAuth = `${config.api.prefix}/auth`;
 
     this._middlewares();
     this._routes();
@@ -22,6 +23,7 @@ class ExpressServer {
 
   _routes() {
     this.app.use(this.basePath, require("../../routes/test"));
+    this.app.use(this.basePathAuth, require("../../routes/auth"));
   }
 
   _notFound() {

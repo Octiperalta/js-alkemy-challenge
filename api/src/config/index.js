@@ -13,6 +13,11 @@ module.exports = {
   log: {
     level: process.env.LOG_LEVEL,
   },
-  database: {},
+  database: {
+    host: process.env.DATABASE_HOST,
+    username: process.env.DATABASE_USERNAME,
+    password: process.env.DATABASE_PASSWORD,
+    name: process.env.DATABASE_NAME,
+  },
   auth: {},
 };
