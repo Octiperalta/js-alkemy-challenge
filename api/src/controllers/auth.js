@@ -11,4 +11,15 @@ const signup = async (req, res, next) => {
   }
 };
 
-module.exports = { signup };
+const login = async (req, res, next) => {
+  const { email, password } = req.body;
+
+  try {
+    const jwt = await authService.login(email, password);
+    res.json({ status: "OK", detail: jwt });
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { signup, login };

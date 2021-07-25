@@ -12,7 +12,7 @@ const customValidationResult = (req, res, next) => {
   next();
 };
 
-// [SIGN UP VALIDATIONS]
+// [VALIDATIONS]
 const _validEmail = check("email", "Email is invalid").isEmail();
 const _requiredEmail = check("email", "Email field is required").notEmpty();
 const _uniqueEmail = check("email").custom(async email => {
@@ -40,4 +40,11 @@ const signupValidations = [
   customValidationResult,
 ];
 
-module.exports = { signupValidations };
+const loginValidations = [
+  _validEmail,
+  _requiredEmail,
+  _requiredPassword,
+  customValidationResult,
+];
+
+module.exports = { signupValidations, loginValidations };

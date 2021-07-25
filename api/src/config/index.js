@@ -19,5 +19,8 @@ module.exports = {
     password: process.env.DATABASE_PASSWORD,
     name: process.env.DATABASE_NAME,
   },
-  auth: {},
+  auth: {
+    secret: process.env.AUTH_SECRET,
+    ttl: process.env.AUTH_TTL,
+  },
 };
