@@ -16,6 +16,22 @@ class OperationRepository {
 
     return rows;
   }
+
+  async create(character) {
+    const { description, amount, operationType, userId } = character;
+
+    const insertQuery =
+      "INSERT INTO operation(description, amount, operation_type, user_id) VALUES (?, ?, ?, ?)";
+    const query = mysql.format(insertQuery, [
+      description,
+      amount,
+      operationType.toUpperCase(),
+      userId,
+    ]);
+
+    const [rows] = await poolConnection.query(query);
+    return rows[0];
+  }
 }
 
 module.exports = OperationRepository;

@@ -5,4 +5,8 @@ const findOperations = async (id, queryParams) => {
   return await repository.findOperations(id, queryParams);
 };
 
-module.exports = { findOperations };
+const create = async operation => {
+  return await repository.create(operation);
+};
+
+module.exports = { findOperations, create };
