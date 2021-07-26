@@ -36,6 +36,15 @@ class UserRepository {
 
     return rows[0];
   }
+
+  async findById(id) {
+    // console.log(id);
+    const selectQuery = "SELECT * FROM user WHERE user_id = ?";
+    const query = mysql.format(selectQuery, id);
+    const [rows] = await poolConnection.query(query);
+
+    return rows[0];
+  }
 }
 
 module.exports = UserRepository;

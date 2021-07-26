@@ -35,7 +35,7 @@ const login = async (email, password) => {
     }
 
     // 3) A token(jwt) is generated from the user id
-    const token = _encrypt(user.id);
+    const token = _encrypt(user.user_id);
 
     // 4) Return jwt with additional information
     return {
@@ -48,8 +48,37 @@ const login = async (email, password) => {
   }
 };
 
+// Encyption function
 const _encrypt = id => {
   return jwt.sign({ id }, auth.secret, { expiresIn: auth.ttl });
 };
 
-module.exports = { signup, login };
+// JWT validator function
+const validateToken = async token => {
+  let id; // Variable that will be used to store the information of the user asociated with the token
+  try {
+    // 1) Verify that something is coming as parameter
+    if (!token) {
+      throw new AppError("Authentication error. Token is missing", 401);
+    }
+
+    // 2) Verify that the token is a valid jwt
+    try {
+      const valid = jwt.verify(token, auth.secret);
+      id = valid.id;
+    } catch (err) {
+      throw new AppError("Authentication error. Invalid token", 401);
+    }
+
+    // 3) Verify that the user is in the database
+    const user = await userService.findById(id);
+    if (!user) throw new AppError("Authentication error. Invalid token", 401);
+
+    // If everything is OK, the user is returned
+    return { id: user.user_id, name: user.name };
+  } catch (err) {
+    throw err;
+  }
+};
+
+module.exports = { signup, login, validateToken };

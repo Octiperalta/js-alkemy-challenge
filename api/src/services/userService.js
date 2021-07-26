@@ -10,4 +10,9 @@ const findByEmail = async email => {
   return await repository.findByEmail(email);
 };
 
-module.exports = { save, findByEmail };
+const findById = async id => {
+  // console.log(id);
+  return await repository.findById(id);
+};
+
+module.exports = { save, findByEmail, findById };

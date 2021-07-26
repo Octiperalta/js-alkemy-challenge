@@ -1,16 +1,8 @@
-const { validationResult, check } = require("express-validator");
+const { check } = require("express-validator");
 const AppError = require("../../error/appError");
 const userService = require("../../services/userService");
-
-const customValidationResult = (req, res, next) => {
-  const errors = validationResult(req);
-
-  if (!errors.isEmpty()) {
-    throw new AppError("Validation failed", 400, errors.errors);
-  }
-
-  next();
-};
+const authService = require("../../services/authService");
+const { customValidationResult: validationResult } = require("../commons");
 
 // [VALIDATIONS]
 const _validEmail = check("email", "Email is invalid").isEmail();
@@ -31,20 +23,32 @@ const _requiredPassword = check(
   "Password field is required"
 ).notEmpty();
 
+const validJWT = async (req, res, next) => {
+  try {
+    const token = req.header("Authorization");
+    const user = await authService.validateToken(token);
+
+    req.user = user;
+    next();
+  } catch (err) {
+    next(err);
+  }
+};
+
 const signupValidations = [
   _validEmail,
   _requiredEmail,
   _uniqueEmail,
   _requiredName,
   _requiredPassword,
-  customValidationResult,
+  validationResult,
 ];
 
 const loginValidations = [
   _validEmail,
   _requiredEmail,
   _requiredPassword,
-  customValidationResult,
+  validationResult,
 ];
 
-module.exports = { signupValidations, loginValidations };
+module.exports = { signupValidations, loginValidations, validJWT };
