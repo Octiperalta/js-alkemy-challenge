@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Signup from "./Pages/Signup";
+import Login from "./Pages/Login";
+import Dashboard from "./Pages/Dashboard";
+import { Route, Switch } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='min-h-screen overlflow-hidden bg-indigo-400 relative'>
+      <Switch>
+        <Route exact path='/login' component={Login} />
+        <Route exact path='/signup' component={Signup} />
+        <Route path='/' component={Dashboard} />
+      </Switch>
+      {/* <Login /> */}
+      {/* <Signup /> */}
+      {/* <Dashboard /> */}
     </div>
   );
 }
