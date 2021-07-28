@@ -32,7 +32,12 @@ function AuthProvider({ children }) {
     }
   };
 
-  const value = { login, signup, currentUser };
+  const logout = () => {
+    console.log("Logout");
+    setCurrentUser(null);
+  };
+
+  const value = { login, signup, currentUser, logout };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 

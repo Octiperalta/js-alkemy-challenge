@@ -5,13 +5,23 @@ class OperationRepository {
   constructor() {}
 
   async findOperations(id, queryParams) {
-    const { limit, order = "" } = queryParams;
-    const selectQuery = `SELECT * FROM user u INNER JOIN operation o ON u.user_id = o.user_id WHERE u.user_id = ? ORDER BY create_time ${
-      order.toLowerCase() === "desc" ? "DESC" : ""
-    } ${limit ? "LIMIT " + limit : ""}`;
+    const { limit, order, type } = queryParams;
 
-    //! RECORDAR CAMBIAR POR ID CORRESPONDIENTE
-    const query = mysql.format(selectQuery, 1);
+    const selectQuery = `
+      SELECT email, operation_id, description, amount, operation_type, date_format(create_time, '%b %d, %Y') as date, operation_type 
+        FROM user u INNER JOIN operation o ON u.user_id = o.user_id
+        WHERE u.user_id = ? ${type ? `AND operation_type = ?` : ""}
+        ORDER BY create_time ${order ? order : "ASC"} ${
+      limit ? "LIMIT ?" : ""
+    }`;
+
+    const array = [
+      id,
+      ...(type ? [type.toUpperCase()] : []),
+      ...(limit ? [Number(limit)] : []),
+    ];
+
+    const query = mysql.format(selectQuery, array);
     const [rows] = await poolConnection.query(query);
 
     return rows;

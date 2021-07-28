@@ -19,8 +19,7 @@ import Navlink from "./Navlink";
 
 function Navigation({ children }) {
   const [open, setOpen] = useState(false);
-  const { currentUser } = useAuth();
-  console.log(currentUser.email);
+  const { currentUser, logout } = useAuth();
 
   const toggleNavbar = () => {
     setOpen(!open);
@@ -79,7 +78,8 @@ function Navigation({ children }) {
             </a>
             <a
               href='#'
-              className='block py-2 px-2 rounded-lg text-sm hover:text-gray-50 transition-colors group'>
+              className='block py-2 px-2 rounded-lg text-sm hover:text-gray-50 transition-colors group'
+              onClick={logout}>
               <div className='flex item-center'>
                 <LeaveIcon className='w-6 h-6 text-indigo-300 mr-3 group-hover:text-gray-200' />
                 <div className='leading-6'>Salir</div>
