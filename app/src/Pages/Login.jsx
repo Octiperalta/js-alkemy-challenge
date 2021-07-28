@@ -1,9 +1,27 @@
-import { motion } from "framer-motion";
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useRef, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { useAuth } from "../Context/AuthContext";
 import { LoginIcon } from "../icons";
+import ErrorMessage from "../Components/ErrorMessage";
 
 function Login() {
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const { login } = useAuth();
+  const [error, setError] = useState("");
+  const history = useHistory();
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    setError("");
+    try {
+      await login(emailRef.current.value, passwordRef.current.value);
+      history.push("/");
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   return (
     <div className='min-h-screen flex items-center justify-center relative py-12 px-4'>
       <img
@@ -25,8 +43,9 @@ function Login() {
         </div>
         <form
           action='#'
-          className='mt-5 space-y-4 max-w-md mx-auto font-poppins'
-          autoComplete='false'>
+          className='mt-5 space-y-3 max-w-md mx-auto font-poppins'
+          autoComplete='false'
+          onSubmit={handleSubmit}>
           <div className='rounded-md shadow-sm -space-y-px'>
             <div>
               <label htmlFor='email-address' className='sr-only'>
@@ -40,6 +59,7 @@ function Login() {
                 required
                 className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
                 placeholder='Email address'
+                ref={emailRef}
               />
             </div>
             <div>
@@ -54,9 +74,11 @@ function Login() {
                 required
                 className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
                 placeholder='Password'
+                ref={passwordRef}
               />
             </div>
           </div>
+          {error && <ErrorMessage errorMessage={error} />}
 
           <div>
             <button

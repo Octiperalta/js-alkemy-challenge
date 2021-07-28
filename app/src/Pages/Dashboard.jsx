@@ -6,6 +6,7 @@ import Navigation from "../Components/Navigation";
 import Operations from "../Components/Operations";
 import Incomes from "../Components/Incomes";
 import Outflows from "../Components/Outflows";
+import PrivateRoute from "../Components/PrivateRoute";
 
 function Dashboard() {
   return (

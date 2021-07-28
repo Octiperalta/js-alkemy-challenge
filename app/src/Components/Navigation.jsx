@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
+import { useAuth } from "../Context/AuthContext";
 import {
   HomeIcon,
   BalanceIcon,
@@ -18,6 +19,8 @@ import Navlink from "./Navlink";
 
 function Navigation({ children }) {
   const [open, setOpen] = useState(false);
+  const { currentUser } = useAuth();
+  console.log(currentUser.email);
 
   const toggleNavbar = () => {
     setOpen(!open);
@@ -109,7 +112,7 @@ function Navigation({ children }) {
                     '
                 />
                 <div className='hidden sm:flex sm:items-center '>
-                  <p className='ml-2'>Octavio Peralta</p>
+                  <p className='ml-2'>{currentUser.name}</p>
                   <ChevronDownIcon className='h-4 w-4 text-gray-500 ml-px' />
                 </div>
               </button>
@@ -127,11 +130,11 @@ function Navigation({ children }) {
               />
               <div className='flex flex-col'>
                 <h4 className='font-bold text-xl sm:text-lg text-gray-900 tracking-tight leading-none'>
-                  Bienvenido Octavio!
+                  Bienvenido {currentUser.name}!
                 </h4>
                 <div className='items-center hidden sm:flex'>
                   <MailIcon className='h-4 w-4 text-gray-600 mr-1 ' />
-                  <p className='text-sm text-gray-500'>octaviojperalta99</p>
+                  <p className='text-sm text-gray-500'>{currentUser.email}</p>
                   <span className='text-gray-400 mx-2'>|</span>
                   <VerifiedIcon className='h-4 w-4 text-green-500 mr-1 ' />
                 </div>
@@ -142,7 +145,7 @@ function Navigation({ children }) {
               <div className='flex item-center'>
                 <MailIcon className='h-6 w-6 text-gray-600 mr-2 ' />
                 <p className='text-base text-gray-500 font-medium'>
-                  octaviojperalta99
+                  {currentUser.email}
                 </p>
               </div>
               <div className='flex item-center'>

@@ -2,6 +2,7 @@ const express = require("express");
 const config = require("../../config");
 const morgan = require("morgan");
 const logger = require("../logger");
+const cors = require("cors");
 
 class ExpressServer {
   constructor() {
@@ -19,6 +20,7 @@ class ExpressServer {
 
   _middlewares() {
     this.app.use(express.json());
+    this.app.use(cors());
     this.app.use(morgan("tiny"));
   }
 

@@ -3,6 +3,7 @@ const AppError = require("../../error/appError");
 const userService = require("../../services/userService");
 const authService = require("../../services/authService");
 const { customValidationResult: validationResult } = require("../commons");
+const loggerInstance = require("../../loaders/logger");
 
 // [VALIDATIONS]
 const _validEmail = check("email", "Email is invalid").isEmail();
@@ -33,6 +34,11 @@ const validJWT = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+};
+
+const logger = async (req, res, next) => {
+  loggerInstance.info(req.body);
+  next();
 };
 
 const signupValidations = [

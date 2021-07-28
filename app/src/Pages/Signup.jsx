@@ -1,9 +1,31 @@
-import { motion } from "framer-motion";
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useRef, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import ErrorMessage from "../Components/ErrorMessage";
+import { useAuth } from "../Context/AuthContext";
 import { KeyIcon } from "../icons";
 
 function Signup() {
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const nameRef = useRef();
+  const { signup } = useAuth();
+  const [error, setError] = useState("");
+  const history = useHistory();
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    const email = emailRef.current.value;
+    const name = nameRef.current.value;
+    const password = passwordRef.current.value;
+
+    try {
+      await signup(email, name, password);
+      history.push("/");
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   return (
     <div className='min-h-screen flex items-center justify-center relative px-4'>
       <img
@@ -26,7 +48,8 @@ function Signup() {
         <form
           action='#'
           className='mt-8 space-y-4 max-w-md mx-auto font-poppins'
-          autoComplete='false'>
+          autoComplete='false'
+          onSubmit={handleSubmit}>
           <div>
             <label
               htmlFor='email-address'
@@ -37,7 +60,10 @@ function Signup() {
               type='email'
               id='email-address'
               required
-              className=' appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-300 text-gray-700 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 font-normal text-lg md:text-base'
+              ref={emailRef}
+              className={`${
+                error ? "border-red-300 bg-red-100 " : ""
+              } appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-300 text-gray-700 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 font-normal text-lg md:text-base`}
             />
           </div>
           <div>
@@ -50,6 +76,7 @@ function Signup() {
               required
               autoComplete='false'
               spellCheck='false'
+              ref={nameRef}
               className=' appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-300 text-gray-700 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 font-normal text-lg md:text-base'
             />
           </div>
@@ -61,9 +88,12 @@ function Signup() {
               type='password'
               id='password'
               required
+              ref={passwordRef}
               className='appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-300 text-gray-700 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 font-normal text-lg md:text-base'
             />
           </div>
+
+          {error && <ErrorMessage errorMessage={error} />}
 
           <div>
             <button

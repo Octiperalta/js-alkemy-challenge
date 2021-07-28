@@ -2,6 +2,7 @@ import Signup from "./Pages/Signup";
 import Login from "./Pages/Login";
 import Dashboard from "./Pages/Dashboard";
 import { Route, Switch } from "react-router-dom";
+import PrivateRoute from "./Components/PrivateRoute";
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
       <Switch>
         <Route exact path='/login' component={Login} />
         <Route exact path='/signup' component={Signup} />
-        <Route path='/' component={Dashboard} />
+        <PrivateRoute path='/' component={Dashboard} />
       </Switch>
     </div>
   );
