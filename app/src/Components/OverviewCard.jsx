@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import { TrendingDownIcon, TrendingUpIcon } from "../icons";
+import { LinkIcon, TrendingDownIcon, TrendingUpIcon } from "../icons";
 
 function OverviewCard({ icon: Icon, title, amount, transaction = false }) {
   return (
@@ -30,8 +30,11 @@ function OverviewCard({ icon: Icon, title, amount, transaction = false }) {
         </div>
       </div>
       <div className='px-4 py-3 bg-gray-100 border-t'>
-        <a href='#' className='text-cyan-600 font-medium text-md'>
-          View all
+        <a
+          href='#'
+          className='text-cyan-600 font-medium text-md inline-flex items-center hover:underline'>
+          Ver más
+          <LinkIcon className='ml-1 h-4 w-4 ' />
         </a>
       </div>
     </div>

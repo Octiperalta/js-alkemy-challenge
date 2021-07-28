@@ -3,21 +3,18 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Home from "../Components/Home";
 import Navigation from "../Components/Navigation";
+import Operations from "../Components/Operations";
+import Incomes from "../Components/Incomes";
+import Outflows from "../Components/Outflows";
 
 function Dashboard() {
   return (
     <Navigation>
       <Switch>
         <Route exact path='/' component={Home} />
-        <Route exact path='/operations'>
-          Operaciones
-        </Route>
-        <Route exact path='/incomes'>
-          Ingresos
-        </Route>
-        <Route exact path='/outflows'>
-          Egresos
-        </Route>
+        <Route exact path='/operations' component={Operations} />
+        <Route exact path='/incomes' component={Incomes} />
+        <Route exact path='/outflows' component={Outflows} />
       </Switch>
     </Navigation>
   );

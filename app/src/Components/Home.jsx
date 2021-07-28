@@ -1,17 +1,10 @@
 import React from "react";
-import {
-  BalanceIcon,
-  ChevronDownIcon,
-  ClipboardIcon,
-  MoneyIcon,
-  TimeIcon,
-  TrendingUpIcon,
-} from "../icons";
+import { BalanceIcon, ClipboardIcon, TimeIcon } from "../icons";
 import OperationsTable from "./OperationsTable";
 import OverviewCard from "./OverviewCard";
 const people = [
   {
-    description: "Loremasdasdada<dsduas asdasjdasdajsdouihasd asdjiasndasdnas",
+    description: "Loremasdasdada<dsduas ",
     title: "Regional ",
     amount: 1000,
     operation_type: "income",
