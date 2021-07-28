@@ -4,47 +4,19 @@ import { Route, Switch } from "react-router-dom";
 import Navigation from "../Components/Navigation";
 import OverviewCard from "../Components/OverviewCard";
 import { BalanceIcon, ClipboardIcon, TimeIcon } from "../icons";
+import Operations from "../Components/Operations";
+import Incomes from "../Components/Incomes";
+import Outflows from "../Components/Outflows";
+import Home from "../Components/Home";
 
 function Dashboard() {
   return (
     <Navigation>
       <Switch>
-        <Route exact path='/'>
-          <div className='px-8 py-8 relative'>
-            <p className='text-xl text-gray-900 font-semibold'>Overview</p>
-
-            <div className='grid grid-cols-1 sm:grid-cols-3 pt-2 gap-3'>
-              <OverviewCard
-                title='Balance de cuenta'
-                amount={"-30659.45"}
-                icon={BalanceIcon}
-                transaction={true}
-              />
-
-              <OverviewCard
-                title='Última operacion'
-                amount={"300.00"}
-                icon={TimeIcon}
-                transaction={true}
-              />
-
-              <OverviewCard
-                title='Cantidad de operaciones'
-                amount={"9"}
-                icon={ClipboardIcon}
-              />
-            </div>
-          </div>
-        </Route>
-        <Route exact path='/operations'>
-          Operaciones
-        </Route>
-        <Route exact path='/incomes'>
-          Ingresos
-        </Route>
-        <Route exact path='/outflows'>
-          Egresos
-        </Route>
+        <Route exact path='/' component={Home} />
+        <Route exact path='/operations' component={Operations} />
+        <Route exact path='/incomes' component={Incomes} />
+        <Route exact path='/outflows' component={Outflows} />
       </Switch>
     </Navigation>
   );

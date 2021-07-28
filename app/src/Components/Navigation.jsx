@@ -31,12 +31,12 @@ function Navigation({ children }) {
     <div className='relative h-screen flex'>
       {/* sidebar */}
       <button
-        className={`absolute bg-black opacity-20 inset-0 w-full h-full select-none cursor-default z-10 ${
+        className={`absolute bg-black opacity-20 inset-0 w-full h-full select-none cursor-default z-20 ${
           open ? "absolute" : "hidden"
         }`}
         onClick={toggleNavbar}></button>
       <div
-        className={`bg-gradient-to-t from-indigo-600 via-indigo-700 to-indigo-800 w-64 text-indigo-100 font-poppins absolute z-10 md:relative md:translate-x-0 inset-y-0 left-0 transform  transition duration-200 ease-in-out ${
+        className={`bg-gradient-to-t from-indigo-600 z-20 flex-shrink-0 via-indigo-700 to-indigo-800 w-64 text-indigo-100 font-poppins absolute md:relative md:translate-x-0 inset-y-0 left-0 transform  transition duration-200 ease-in-out ${
           open ? "translate-x-0" : "-translate-x-full"
         }`}>
         <div className='absolute right-3 top-2 md:hidden'>
@@ -88,7 +88,7 @@ function Navigation({ children }) {
       {/* content */}
       <div className='bg-gray-200 flex-1 font-poppins flex flex-col'>
         {/* header */}
-        <div className='flex flex-col bg-gray-50  shadow-md'>
+        <div className='flex flex-col bg-gray-50  shadow-md relative z-10'>
           {/* top header */}
           <div className='flex justify-between md:justify-end items-center px-3 sm:mx-8 sm:py-4 border-b border-gray-200 '>
             <button
