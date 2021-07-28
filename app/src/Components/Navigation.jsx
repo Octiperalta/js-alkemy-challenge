@@ -29,12 +29,12 @@ function Navigation({ children }) {
 
   return (
     <div className='relative h-screen flex'>
-      {/* sidebar */}
       <button
         className={`absolute bg-black opacity-20 inset-0 w-full h-full select-none cursor-default z-20 ${
           open ? "absolute" : "hidden"
         }`}
         onClick={toggleNavbar}></button>
+      {/* sidebar */}
       <div
         className={`bg-gradient-to-t from-indigo-600 z-20 flex-shrink-0 via-indigo-700 to-indigo-800 w-64 text-indigo-100 font-poppins absolute md:relative md:translate-x-0 inset-y-0 left-0 transform  transition duration-200 ease-in-out ${
           open ? "translate-x-0" : "-translate-x-full"
@@ -165,7 +165,7 @@ function Navigation({ children }) {
         </div>
 
         {/* MAIN CONTENT */}
-        <div className='flex-1 overflow-y-auto'>{children}</div>
+        <div className='flex-1 overflow-y-auto '>{children}</div>
       </div>
     </div>
   );

@@ -29,7 +29,7 @@ function OverviewCard({ icon: Icon, title, amount, transaction = false }) {
           )}
         </div>
       </div>
-      <div className='px-4 py-3 bg-gray-100 '>
+      <div className='px-4 py-3 bg-gray-100 border-t'>
         <a
           href='#'
           className='text-cyan-600 font-medium text-md inline-flex items-center hover:underline'>
