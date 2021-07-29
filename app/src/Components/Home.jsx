@@ -56,9 +56,9 @@ function Home() {
         </div>
 
         <div className='mt-6'>
-          <p className='text-xl text-gray-900 font-semibold flex items-center'>
+          <p className='text-xl text-gray-900 font-semibold flex items-center leading-none'>
             Actividad reciente{" "}
-            <span className='ml-3 block text-gray-500 text-lg font-medium sm:text-base tracking-tight '>
+            <span className='hidden sm:block ml-3 text-gray-500 text-lg font-medium sm:text-base tracking-tight leading-none'>
               10 últimas operaciones
             </span>
           </p>

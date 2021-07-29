@@ -50,7 +50,7 @@ function Navigation({ children }) {
           </button>
         </div>
         {/* logo */}
-        <a href='' className='flex items-center py-3 px-3'>
+        <Link to='/' className='flex items-center py-3 px-3'>
           <img
             src='./img/logo-indigo-100.png'
             alt=''
@@ -59,7 +59,7 @@ function Navigation({ children }) {
           <h2 className='ml-2 tracking-wide font-bold text-white text-2xl'>
             operawork
           </h2>
-        </a>
+        </Link>
         {/* nav */}
         <div className='mt-6 text-indigo-200 flex flex-col '>
           <div className='flex flex-col space-y-3 py-3 px-3'>
@@ -166,7 +166,7 @@ function Navigation({ children }) {
               <div>
                 <Link
                   to='/outflows/create'
-                  className='block px-3 py-3 sm:py-2 tracking-tight leading-tight text-white bg-indigo-500 text-base sm:text-sm border rounded-md hover:bg-indigo-600 transition-colors focus:outline-none focus:ring focus:ring-indigo-400'>
+                  className='block px-3 py-3 sm:py-2 tracking-tight leading-tight text-white bg-indigo-600 text-base sm:text-sm border rounded-md hover:bg-indigo-700 transition-colors focus:outline-none focus:ring focus:ring-indigo-400'>
                   Enviar dinero
                 </Link>
               </div>

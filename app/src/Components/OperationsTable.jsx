@@ -1,7 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useState } from "react";
 import { ChevronDownIcon, TrendingDownIcon, TrendingUpIcon } from "../icons";
 import OperationRow from "./OperationRow";
+import { Transition } from "@headlessui/react";
+import MobileOperation from "./MobileOperation";
 
 function OperationsTable({ data: operations }) {
   return (
@@ -43,36 +45,7 @@ function OperationsTable({ data: operations }) {
 
       <div className=' flex flex-col space-y-1 lg:hidden'>
         {operations.length > 0 ? (
-          operations.map(o => (
-            <div
-              className='-mx-8 sm:mx-0 px-8 py-4 bg-white sm:rounded-md shadow '
-              key={o.operation_id}>
-              <div className='flex space-x-3'>
-                {o.operation_type.toLowerCase() === "income" ? (
-                  <TrendingUpIcon className='w-6 h-6 text-green-500' />
-                ) : (
-                  <TrendingDownIcon className='w-6 h-6 text-red-500' />
-                )}
-
-                <div className='flex items-center justify-between w-full'>
-                  <div>
-                    <p className='text-base text-gray-500 font-medium'>
-                      {o.description}
-                    </p>
-                    <p className='text-base font-semibold text-gray-900'>
-                      $ {o.amount}
-                    </p>
-                    <p className='text-base text-gray-500 font-medium'>
-                      {o.date}
-                    </p>
-                  </div>
-                  <button>
-                    <ChevronDownIcon className='w-5 h-5 transform text-gray-500 -rotate-90' />
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))
+          operations.map(o => <MobileOperation operation={o} />)
         ) : (
           <div className='flex justify-center text-gray-300 tracking-wider font-semibold uppercase text-xl'>
             Sin registros
