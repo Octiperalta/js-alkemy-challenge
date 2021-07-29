@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
 import { getOperations } from "../services/operationService";
 import OperationsTable from "./OperationsTable";
@@ -7,10 +8,11 @@ import OperationsTable from "./OperationsTable";
 function Incomes() {
   const [operations, setOperations] = useState([]);
   const { currentUser } = useAuth();
+  const location = useLocation();
 
   useEffect(() => {
     getOperations(currentUser.token, "income").then(ops => setOperations(ops));
-  }, []);
+  }, [location]);
 
   return (
     <motion.div

@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
 import {
@@ -77,15 +77,15 @@ function Navigation({ children }) {
                 <div className='leading-6'>Configuración</div>
               </div>
             </a>
-            <a
-              href='#'
+            <Link
+              to='#'
               className='block py-2 px-2 rounded-lg text-sm hover:text-gray-50 transition-colors group'
               onClick={logout}>
               <div className='flex item-center'>
                 <LeaveIcon className='w-6 h-6 text-indigo-300 mr-3 group-hover:text-gray-200' />
                 <div className='leading-6'>Salir</div>
               </div>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

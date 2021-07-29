@@ -97,7 +97,7 @@ function Outflow() {
                       className='px-4 py-3 md:py-2 text-md md:text-base flex-grow border rounded-md font-medium border-gray-300 text-gray-700 hover:bg-gray-100 transition-colors'>
                       Cancelar
                     </Link>
-                    <button className='px-4 py-3 md:py-2 text-md md:text-base flex-grow border rounded-md bg-indigo-500 text-white font-medium hover:bg-indigo-600 transition-colors'>
+                    <button className='px-4 flex items-center py-3 md:py-2 text-md md:text-base flex-grow border rounded-md bg-indigo-500 text-white font-medium hover:bg-indigo-600 transition-colors'>
                       {loading ? (
                         <>
                           <LoaderIcon className='animate-spin -ml-1 mr-3 h-4 w-4 text-white' />

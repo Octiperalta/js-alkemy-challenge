@@ -1,11 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import {
-  ChevronDownIcon,
-  MoneyIcon,
-  TrendingDownIcon,
-  TrendingUpIcon,
-} from "../icons";
+import { ChevronDownIcon, TrendingDownIcon, TrendingUpIcon } from "../icons";
+import OperationRow from "./OperationRow";
 
 function OperationsTable({ data: operations }) {
   return (
@@ -36,46 +32,7 @@ function OperationsTable({ data: operations }) {
 
                 <tbody className='bg-white divide-y divide-gray-200'>
                   {operations.map((op, index) => (
-                    <tr key={index}>
-                      <td className='px-6 py-4 '>
-                        <div className='text-sm font-medium text-gray-900 flex items-center'>
-                          <MoneyIcon className='h-4 w-4 mr-2 text-gray-600 flex-shrink-0' />
-                          {op.description}
-                        </div>
-                      </td>
-                      <td className='px-6 py-4 whitespace-nowrap'>
-                        <div className='text-sm text-gray-900'>
-                          $ {op.amount}
-                        </div>
-                      </td>
-                      <td className='px-6 py-4 whitespace-nowrap'>
-                        <span
-                          className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full  ${
-                            op.operation_type.toLowerCase() === "income"
-                              ? "bg-green-100 text-green-800"
-                              : "bg-red-100 text-red-800"
-                          } `}>
-                          {op.operation_type.toLowerCase() === "income"
-                            ? "Ingreso"
-                            : "Egreso"}
-                        </span>
-                      </td>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-                        {op.date}
-                      </td>
-                      <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
-                        <a
-                          href='#'
-                          className='text-indigo-600 hover:text-indigo-900'>
-                          Editar
-                        </a>
-                      </td>
-                      <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
-                        <a href='#' className='text-red-600 hover:text-red-900'>
-                          Eliminar
-                        </a>
-                      </td>
-                    </tr>
+                    <OperationRow operation={op} />
                   ))}
                 </tbody>
               </table>

@@ -9,6 +9,7 @@ import {
   getLastOperation,
   getOperations,
 } from "../services/operationService";
+import { useLocation } from "react-router-dom";
 
 function Home() {
   const [operations, setOperations] = useState([]);
@@ -17,10 +18,11 @@ function Home() {
   const lastOperation =
     operations.length > 0 ? getLastOperation(operations) : 0;
   const operationsBalance = getBalance(operations);
+  const location = useLocation();
 
   useEffect(() => {
     getOperations(currentUser.token).then(ops => setOperations(ops));
-  }, []);
+  }, [location]);
 
   return (
     <motion.div

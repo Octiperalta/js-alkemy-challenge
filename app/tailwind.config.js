@@ -36,6 +36,9 @@ module.exports = {
       colors: {
         cyan: colors.cyan,
       },
+      spacing: {
+        13: "3.25rem",
+      },
     },
   },
   variants: {

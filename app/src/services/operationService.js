@@ -1,5 +1,5 @@
 const getOperationsURL = "http://localhost:4000/api/v1/operations?order=DESC";
-const createOperationURL = "http://localhost:4000/api/v1/operations";
+const operationURL = "http://localhost:4000/api/v1/operations";
 
 async function getOperations(token, operation_type) {
   const requestOptions = {
@@ -7,11 +7,11 @@ async function getOperations(token, operation_type) {
     headers: { Authorization: token },
   };
 
-  const url = operation_type
+  const urlWithQuery = operation_type
     ? `${getOperationsURL}&type=${operation_type}`
     : getOperationsURL;
 
-  const response = await fetch(url, requestOptions);
+  const response = await fetch(urlWithQuery, requestOptions);
 
   const { data } = await response.json();
 
@@ -39,10 +39,45 @@ async function createOperation(description, amount, type, token) {
     body: JSON.stringify(operation),
   };
 
-  const response = await fetch(createOperationURL, requestOptions);
+  const response = await fetch(operationURL, requestOptions);
   const data = await response.json();
 
   return data;
 }
 
-export { getOperations, getLastOperation, getBalance, createOperation };
+async function editOperation(description, amount, token, operationId) {
+  const operation = { description, amount };
+
+  const requestOptions = {
+    method: "PUT",
+    headers: { "Content-Type": "application/json", Authorization: token },
+    body: JSON.stringify(operation),
+  };
+
+  const updateRequestURL = operationURL + "/" + operationId;
+  const response = await fetch(updateRequestURL, requestOptions);
+  const data = await response.json();
+
+  return data;
+}
+
+async function deleteOperation(operationId, token) {
+  const requestOptions = {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json", Authorization: token },
+  };
+  const deleteRequestURL = operationURL + "/" + operationId;
+  const response = await fetch(deleteRequestURL, requestOptions);
+  const data = await response.json();
+
+  return data;
+}
+
+export {
+  getOperations,
+  getLastOperation,
+  getBalance,
+  createOperation,
+  editOperation,
+  deleteOperation,
+};
