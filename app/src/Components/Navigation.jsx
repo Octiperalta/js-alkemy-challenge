@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
+import { Link } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
 import {
   HomeIcon,
@@ -89,7 +90,7 @@ function Navigation({ children }) {
         </div>
       </div>
       {/* content */}
-      <div className='bg-gray-200 flex-1 font-poppins flex flex-col'>
+      <div className='bg-gray-200 flex-1 font-poppins flex flex-col relative'>
         {/* header */}
         <div className='flex flex-col bg-gray-50  shadow-md relative z-10'>
           {/* top header */}
@@ -157,12 +158,18 @@ function Navigation({ children }) {
             </div>
             {/* right */}
             <div className='flex space-x-4 sm:space-x-2'>
-              <button className='px-3 py-3 sm:p-2 tracking-tight leading-tight text-gray-600 text-base sm:text-sm font-medium border ring-1 ring-black ring-opacity-5  rounded-md hover:bg-gray-100 transition-colors focus:outline-none focus:ring focus:ring-blue-300'>
+              <Link
+                to='/incomes/create'
+                className=' block px-3 py-3 sm:p-2 tracking-tight leading-tight text-gray-600 text-base sm:text-sm font-medium border ring-1 ring-black ring-opacity-5  rounded-md hover:bg-gray-100 transition-colors focus:outline-none focus:ring focus:ring-blue-300'>
                 Ingresar dinero
-              </button>
-              <button className='px-3 py-3 sm:py-2 tracking-tight leading-tight text-white bg-indigo-500 text-base sm:text-sm border rounded-md hover:bg-indigo-600 transition-colors focus:outline-none focus:ring focus:ring-indigo-400'>
-                Enviar dinero
-              </button>
+              </Link>
+              <div>
+                <Link
+                  to='/outflows/create'
+                  className='block px-3 py-3 sm:py-2 tracking-tight leading-tight text-white bg-indigo-500 text-base sm:text-sm border rounded-md hover:bg-indigo-600 transition-colors focus:outline-none focus:ring focus:ring-indigo-400'>
+                  Enviar dinero
+                </Link>
+              </div>
             </div>
           </div>
         </div>

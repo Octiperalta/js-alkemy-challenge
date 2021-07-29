@@ -1,4 +1,5 @@
 const getOperationsURL = "http://localhost:4000/api/v1/operations?order=DESC";
+const createOperationURL = "http://localhost:4000/api/v1/operations";
 
 async function getOperations(token, operation_type) {
   const requestOptions = {
@@ -30,4 +31,18 @@ function getBalance(operations = []) {
   }, 0);
 }
 
-export { getOperations, getLastOperation, getBalance };
+async function createOperation(description, amount, type, token) {
+  const operation = { description, amount, operationType: type };
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Authorization: token },
+    body: JSON.stringify(operation),
+  };
+
+  const response = await fetch(createOperationURL, requestOptions);
+  const data = await response.json();
+
+  return data;
+}
+
+export { getOperations, getLastOperation, getBalance, createOperation };
