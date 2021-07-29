@@ -21,10 +21,45 @@ const createOperation = async (req, res, next) => {
       detail: "Operation created successfully",
     });
   } catch (err) {
-    throw err;
+    next(err);
   }
 
   res.status(200).end();
 };
 
-module.exports = { getOperations, createOperation };
+const updateOperation = async (req, res, next) => {
+  const { id } = req.params;
+
+  const operation = { ...req.body, operation_id: id };
+
+  try {
+    await operationService.update(operation);
+
+    res.status(201).json({
+      status: "OK",
+      detail: "Operation updated successfully",
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+const deleteOperation = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    await operationService.remove(id);
+    res.status(201).json({
+      status: "OK",
+      detail: "Operation deleted successfully",
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = {
+  getOperations,
+  createOperation,
+  updateOperation,
+  deleteOperation,
+};

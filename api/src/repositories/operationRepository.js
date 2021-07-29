@@ -27,8 +27,16 @@ class OperationRepository {
     return rows;
   }
 
-  async create(character) {
-    const { description, amount, operationType, userId } = character;
+  async findById(id) {
+    const selectQuery = "SELECT * FROM operation WHERE operation_id = ?";
+    const query = mysql.format(selectQuery, id);
+
+    const [rows] = await poolConnection.query(query);
+    return rows[0];
+  }
+
+  async create(opearation) {
+    const { description, amount, operationType, userId } = opearation;
 
     const insertQuery =
       "INSERT INTO operation(description, amount, operation_type, user_id) VALUES (?, ?, ?, ?)";
@@ -41,6 +49,22 @@ class OperationRepository {
 
     const [rows] = await poolConnection.query(query);
     return rows[0];
+  }
+
+  async update(operation) {
+    const { description, amount, operation_id } = operation;
+    const putQuery =
+      "UPDATE operation SET description = ?, amount = ? WHERE operation_id = ?";
+
+    const query = mysql.format(putQuery, [description, amount, operation_id]);
+    await poolConnection.query(query);
+  }
+
+  async remove(id) {
+    const deleteQuery = "DELETE FROM operation WHERE operation_id = ?";
+
+    const query = mysql.format(deleteQuery, id);
+    await poolConnection.query(query);
   }
 }
 

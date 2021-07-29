@@ -9,4 +9,16 @@ const create = async operation => {
   return await repository.create(operation);
 };
 
-module.exports = { findOperations, create };
+const update = async operation => {
+  return await repository.update(operation);
+};
+
+const remove = async id => {
+  return await repository.remove(id);
+};
+
+const findById = async id => {
+  return await repository.findById(id);
+};
+
+module.exports = { findOperations, create, update, findById, remove };

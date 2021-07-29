@@ -2,6 +2,7 @@ const { validJWT } = require("../auth");
 const { customValidationResult: validationResult } = require("../commons");
 const { check } = require("express-validator");
 const AppError = require("../../error/appError");
+const operationService = require("../../services/operationService");
 
 const TYPES = ["INCOME", "OUTFLOW"];
 
@@ -24,7 +25,22 @@ const _validOperationType = check("operationType").custom(async (type = "") => {
   }
 });
 
+const _idExists = check("id").custom(async (id = "") => {
+  const operationFound = await operationService.findById(id);
+  if (!operationFound) {
+    throw new AppError("The id provided was not found in the database", 401);
+  }
+});
+
 const getOperationValidations = [validJWT, validationResult];
+const updateOperationValidations = [
+  validJWT,
+  _idExists,
+  _requiredDescription,
+  _requiredAmount,
+  _numericAmount,
+  validationResult,
+];
 const createOperationValidations = [
   validJWT,
   _requiredDescription,
@@ -34,5 +50,11 @@ const createOperationValidations = [
   _validOperationType,
   validationResult,
 ];
+const deleteOperationValidations = [validJWT, _idExists, validationResult];
 
-module.exports = { getOperationValidations, createOperationValidations };
+module.exports = {
+  getOperationValidations,
+  createOperationValidations,
+  updateOperationValidations,
+  deleteOperationValidations,
+};
